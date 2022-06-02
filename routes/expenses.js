@@ -1,25 +1,33 @@
 const express = require('express');
-const res = require('express/lib/response');
 
 const expensesController = require('../constrollers/expenses')
 
 const router = express.Router()
 
 
+// create new expense
+
 router.post('/create', expensesController.createExpense)
 
-router.get('/search', expensesController.findExpenseByName )
+// search expense by name
+
+router.get('/search/name', expensesController.findExpenseByName )
 
 router.get('/holis', () => {
     res.send('holis')
 })
 
+// show all expenses
 
-router.get('/all', () => {
-    console.log('get all expenses')
-})
+router.get('/all', expensesController.showAll)
+
+//search expense by id
 
 router.get('/id/:id', expensesController.getById)
+
+// search expense by category
+
+// router.get('/search/category', expensesController.getByCategory )
 
 
 

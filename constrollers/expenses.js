@@ -54,6 +54,36 @@ const getById = async (req, res, next) => {
     }
 }
 
+// const getByCategory = async (req, res, next) => {
+
+//     if (req.query.name === '') {
+//         res.statusCode = 400
+//         res.send('Category name cannot be empty')
+//     }
+
+//     try {
+//         const expenses = await expense.findByName(req.query.name)
+//         console.log('Response expense', expenses)
+//         res.send(expenses)
+//     } catch (err) {
+//         console.log(err)
+//         res.statusCode = 500
+//         res.send(err.message)
+//     }
+// }
+
+const showAll = async (req, res, next) => {
+
+    try {
+        const allExpenses = await expense.showAll()
+        res.send(allExpenses)
+    } catch (err) {
+        console.log(err)
+        res.statusCode = 500
+        res.send(err.message)
+    }
+}
+
 
 const nameIsValid = (name) => {
     return name !== ''
@@ -62,4 +92,4 @@ const nameIsValid = (name) => {
 
 
 
-module.exports = { createExpense, findExpenseByName, getById, }
+module.exports = { createExpense, findExpenseByName, getById, showAll, getByCategory }

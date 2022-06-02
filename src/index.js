@@ -8,7 +8,7 @@ const app = express()
 app.use(bodyParser.json())
 
 app.use('/api/expenses', expensesRouter)
-// app.use('/api/categories', categoriesRouter)
+app.use('/api/categories', categoriesRouter)
 
 app.use((req, res, next) => {
   res.statusCode = 404

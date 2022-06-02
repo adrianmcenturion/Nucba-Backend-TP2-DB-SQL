@@ -57,4 +57,26 @@ const getById = async (id) => {
     }
 }
 
-module.exports = { create, findByName, getById}
+
+// const getByCategory = async (name) => {
+//     try {
+//         return await prisma.expenses.findMany(name)
+//     } catch (err) {
+//         console.log(err)
+//         throw new Error(err)
+//     }
+// }
+
+
+
+const showAll = async () => {
+    try {
+        const expenses = await prisma.expense.findMany()
+        return expenses
+    } catch (err) {
+        console.error(err)
+        throw new Error(err)
+    }
+}
+
+module.exports = { create, findByName, getById, showAll, getByCategory}
