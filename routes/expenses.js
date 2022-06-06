@@ -19,7 +19,7 @@ router.get('/holis', () => {
 
 // show all expenses
 
-router.get('/all', expensesController.showAll)
+router.get('/', expensesController.showAll)
 
 //search expense by id
 

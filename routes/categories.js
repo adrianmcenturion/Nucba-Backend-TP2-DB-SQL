@@ -7,7 +7,7 @@ const router = express.Router()
 
 // show all categories
 
-router.get('/all', categoriesController.showAll)
+router.get('/', categoriesController.showAll)
 
 
 // create a new category
