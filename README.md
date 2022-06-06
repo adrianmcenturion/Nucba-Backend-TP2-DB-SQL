@@ -1,4 +1,7 @@
-# CATEGORY
+# Expenses App 
+
+
+## CATEGORY
 
 
 
@@ -21,7 +24,7 @@ Ejemplo JSON Body:
  
 
 
-# EXPENSES
+## EXPENSES
 
 
 
