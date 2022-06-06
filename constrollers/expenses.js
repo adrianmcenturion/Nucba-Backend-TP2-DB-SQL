@@ -92,4 +92,4 @@ const nameIsValid = (name) => {
 
 
 
-module.exports = { createExpense, findExpenseByName, getById, showAll, getByCategory }
+module.exports = { createExpense, findExpenseByName, getById, showAll,  }
