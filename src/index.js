@@ -16,6 +16,13 @@ app.use((req, res, next) => {
 })
 
 
+// app.use(express.static(PATH));
+
+// app.get("/*", function (req, res) {
+//   res.sendFile(PATH + "/index.html");
+// });
+
+
 
 const PORT = process.env.PORT || 3000
 app.listen(PORT, () =>

@@ -79,4 +79,4 @@ const showAll = async () => {
     }
 }
 
-module.exports = { create, findByName, getById, showAll, getByCategory}
+module.exports = { create, findByName, getById, showAll, }
