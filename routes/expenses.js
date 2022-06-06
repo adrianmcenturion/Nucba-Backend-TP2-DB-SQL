@@ -25,7 +25,7 @@ router.get('/search/category', expensesController.getByCategory )
 
 router.get('/total', expensesController.getTotalAmount)
 
-// get total amount by category
+// get category total amount
 
 router.get('/total/category', expensesController.getTotalAmountByCategory )
 
