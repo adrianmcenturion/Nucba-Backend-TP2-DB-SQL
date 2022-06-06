@@ -25,13 +25,16 @@ const create = async (name, amount, date, categoryId) => {
 const findByName = async (name) => {
 
     try {
-        const expenses = await prisma.expenses.findMany({
-            include: {
-                category: true
-            },
+        const expenses = await prisma.expense.findMany({
             where: {
                 name: name
             },
+            select: {
+                name: true,
+                amount: true,
+                createdAt: true,
+                category: true
+            }
         })
         return expenses
     } catch (err) {
@@ -41,16 +44,21 @@ const findByName = async (name) => {
 
 }
 
-const getById = async (id) => {
+
+const getByCategory = async (category) => {
     try {
-        return await prisma.expenses.findUnique({
+        const expenses = await prisma.expense.findMany({
             where: {
-                id: id
+                categoryId: category,
             },
-            include: {
-                category: true
+            select: {
+                name: true,
+                amount: true,
+                createdAt: true,
             },
         })
+        return expenses
+
     } catch (err) {
         console.log(err)
         throw new Error(err)
@@ -58,20 +66,12 @@ const getById = async (id) => {
 }
 
 
-// const getByCategory = async (name) => {
-//     try {
-//         return await prisma.expenses.findMany(name)
-//     } catch (err) {
-//         console.log(err)
-//         throw new Error(err)
-//     }
-// }
-
-
 
 const showAll = async () => {
     try {
-        const expenses = await prisma.expense.findMany()
+        const expenses = await prisma.expense.findMany({
+             
+        })
         return expenses
     } catch (err) {
         console.error(err)
@@ -79,4 +79,42 @@ const showAll = async () => {
     }
 }
 
-module.exports = { create, findByName, getById, showAll, }
+const getTotalAmount = async () => {
+
+    try {
+        const expenses = await prisma.expense.findMany()
+
+        let initialValue = 0
+
+        let total = expenses.reduce((acc, currentValue) => { return acc + currentValue.amount }, initialValue)
+
+        return `Total expenses: $${total}`
+
+    } catch (err) {
+        console.log(err)
+        throw new Error(err)
+    }
+}
+
+const getTotalAmountByCategory = async (category) => {
+
+    const expenses = await prisma.expense.findMany({
+        where: {
+            categoryId: category,
+        },
+        select: {
+            name: true,
+            amount: true,
+            createdAt: true,
+        }
+    })
+
+    let initialValue = 0
+
+    let total = expenses.reduce((acc, currentValue) => { return acc + currentValue.amount }, initialValue)
+
+    return `Total expenses: $${total}`
+
+}
+
+module.exports = { create, findByName, showAll, getByCategory, getTotalAmount, getTotalAmountByCategory }

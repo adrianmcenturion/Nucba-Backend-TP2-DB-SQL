@@ -21,13 +21,18 @@ router.get('/holis', () => {
 
 router.get('/', expensesController.showAll)
 
-//search expense by id
-
-router.get('/id/:id', expensesController.getById)
 
 // search expense by category
 
-// router.get('/search/category', expensesController.getByCategory )
+router.get('/search/category', expensesController.getByCategory )
+
+// get total expenses
+
+router.get('/total', expensesController.getTotalAmount)
+
+// get total amount by category
+
+router.get('/total/category', expensesController.getTotalAmountByCategory )
 
 
 

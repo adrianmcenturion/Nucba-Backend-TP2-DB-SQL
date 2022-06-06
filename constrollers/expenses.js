@@ -26,13 +26,15 @@ const createExpense = async (req, res, next) => {
 
 const findExpenseByName = async (req, res, next) => {
 
-    if (req.query.name === '') {
+    const name = req.body.name
+
+    if (name === '') {
         res.statusCode = 400
         res.send('Name cannot be empty')
     }
 
     try {
-        const expenses = await expense.findByName(req.query.name)
+        const expenses = await expense.findByName(name)
         console.log('Response expense', expenses)
         res.send(expenses)
     } catch (err) {
@@ -42,11 +44,13 @@ const findExpenseByName = async (req, res, next) => {
     }
 }
 
-const getById = async (req, res, next) => {
+
+const getByCategory = async (req, res, next) => {
+
     try {
-        const id = req.params.id
-        const expenseFound = await expense.getById(id)
-        res.send(expenseFound)
+        const category = req.body.category
+        const getExpenses = await expense.getByCategory(category)
+        res.send(getExpenses)
     } catch (err) {
         console.log(err)
         res.statusCode = 500
@@ -54,29 +58,34 @@ const getById = async (req, res, next) => {
     }
 }
 
-// const getByCategory = async (req, res, next) => {
-
-//     if (req.query.name === '') {
-//         res.statusCode = 400
-//         res.send('Category name cannot be empty')
-//     }
-
-//     try {
-//         const expenses = await expense.findByName(req.query.name)
-//         console.log('Response expense', expenses)
-//         res.send(expenses)
-//     } catch (err) {
-//         console.log(err)
-//         res.statusCode = 500
-//         res.send(err.message)
-//     }
-// }
-
 const showAll = async (req, res, next) => {
 
     try {
         const allExpenses = await expense.showAll()
         res.send(allExpenses)
+    } catch (err) {
+        console.log(err)
+        res.statusCode = 500
+        res.send(err.message)
+    }
+}
+
+const getTotalAmount = async (req, res, next) => {
+    try {
+        const total = await expense.getTotalAmount()
+        res.send(total)
+    } catch (err) {
+        console.log(err)
+        res.statusCode = 500
+        res.send(err.message)
+    }
+}
+
+const getTotalAmountByCategory = async (req, res, next) => {
+    try {
+        const category = req.body.category
+        const total = await expense.getTotalAmountByCategory(category)
+        res.send(total)
     } catch (err) {
         console.log(err)
         res.statusCode = 500
@@ -92,4 +101,4 @@ const nameIsValid = (name) => {
 
 
 
-module.exports = { createExpense, findExpenseByName, getById, showAll,  }
+module.exports = { createExpense, findExpenseByName, showAll, getByCategory, getTotalAmount, getTotalAmountByCategory}
