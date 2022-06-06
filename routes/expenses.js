@@ -13,20 +13,15 @@ router.post('/create', expensesController.createExpense)
 
 router.get('/search/name', expensesController.findExpenseByName )
 
-router.get('/holis', () => {
-    res.send('holis')
-})
-
 // show all expenses
 
 router.get('/', expensesController.showAll)
-
 
 // search expense by category
 
 router.get('/search/category', expensesController.getByCategory )
 
-// get total expenses
+// get total amount
 
 router.get('/total', expensesController.getTotalAmount)
 

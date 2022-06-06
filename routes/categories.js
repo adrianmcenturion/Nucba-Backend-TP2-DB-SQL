@@ -9,7 +9,6 @@ const router = express.Router()
 
 router.get('/', categoriesController.showAll)
 
-
 // create a new category
 
 router.post('/create', categoriesController.createCategory)

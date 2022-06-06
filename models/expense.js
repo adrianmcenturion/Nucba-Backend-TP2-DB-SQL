@@ -70,6 +70,12 @@ const getByCategory = async (category) => {
 const showAll = async () => {
     try {
         const expenses = await prisma.expense.findMany({
+            select: {
+                name: true,
+                amount: true,
+                createdAt: true,
+                category: true
+            }
              
         })
         return expenses
@@ -101,11 +107,6 @@ const getTotalAmountByCategory = async (category) => {
     const expenses = await prisma.expense.findMany({
         where: {
             categoryId: category,
-        },
-        select: {
-            name: true,
-            amount: true,
-            createdAt: true,
         }
     })
 
